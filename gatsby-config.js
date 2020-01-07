@@ -6,4 +6,8 @@
 
 module.exports = {
   /* Your site config here */
+  siteMetadata: {
+    title: `My Gatsby Site`,
+    description: `Just another Gatsby site, ol' sport!`,
+  },
 }

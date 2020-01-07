@@ -4,9 +4,9 @@ import Layout from "../components/layout"
 
 export default () => (
   <Layout>
-    <h1>Hello world!</h1>
+    <h1>About Me!</h1>
     <p>
-      Read more <Link to={"/about"}>about me</Link>.
+      Go back <Link to={"/"}>home</Link>.
     </p>
   </Layout>
 )
