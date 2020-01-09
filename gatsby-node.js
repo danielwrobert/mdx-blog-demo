@@ -23,6 +23,9 @@ exports.createPages = async ({ graphql, actions: { createPage }, reporter }) => 
 		createPage({
 			path: `/blog/${post.frontmatter.slug}`,
 			component: require.resolve(`./src/templates/post.js`),
+			context: {
+				slug: post.frontmatter.slug, // This does not necessarily have to match the `path` above. We can also pass multiple things here.
+			},
 		});
 	});
 };
