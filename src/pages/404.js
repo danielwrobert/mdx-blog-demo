@@ -4,9 +4,9 @@ import Layout from '../components/layout';
 
 export default () => (
 	<Layout>
-		<h1>About Me!</h1>
+		<h1>404</h1>
 		<p>
-			Go back <Link to={'/'}>home</Link>.
+			Page not found. Go back <Link to={'/'}>home</Link>.
 		</p>
 	</Layout>
 );
