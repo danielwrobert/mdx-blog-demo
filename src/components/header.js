@@ -25,6 +25,11 @@ const Header = () => {
 							About
 						</Link>
 					</li>
+					<li>
+						<Link to={'/blog'} activeClassName="active" partiallyActive={true}>
+							Blog
+						</Link>
+					</li>
 				</ul>
 			</nav>
 		</header>

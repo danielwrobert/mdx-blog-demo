@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from '../components/layout';
-import { graphql } from 'gatsby';
+import { Link, graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 
 export const postQuery = graphql`
@@ -35,6 +35,9 @@ export default ({ data }) => {
 
 	return (
 		<Layout>
+			<p>
+				<Link to={'/blog/'}>&lt; Back to all posts</Link>
+			</p>
 			<h1>{title}</h1>
 			<MDXRenderer>{body}</MDXRenderer>
 		</Layout>
