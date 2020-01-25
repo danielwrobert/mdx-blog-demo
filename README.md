@@ -1,36 +1,29 @@
-<!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
-<p align="center">
-  <a href="https://www.gatsbyjs.org">
-    <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby's hello-world starter
-</h1>
+# MDX Blog Demo
 
-Kick off your project with this hello-world boilerplate. This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
+An example blog built with Gatsby and MDX.
 
-_Have another more specific idea? You may want to check out our vibrant collection of [official and community-created starters](https://www.gatsbyjs.org/docs/gatsby-starters/)._
+This project was created by following along with the [Gatsby Basics](https://javascriptforwp.com/courses/gatsby-basics) course on [JavaScript for WordPress](https://javascriptforwp.com/).
 
 ## 🚀 Quick start
 
-1.  **Create a Gatsby site.**
+1.  **Clone this site.**
 
-    Use the Gatsby CLI to create a new site, specifying the hello-world starter.
+    Clone this repository to your local machine.
 
     ```shell
-    # create a new Gatsby site using the hello-world starter
-    gatsby new my-hello-world-starter https://github.com/gatsbyjs/gatsby-starter-hello-world
+    git clone git@github.com:danielwrobert/mdx-blog-demo.git
     ```
 
 1.  **Start developing.**
 
-    Navigate into your new site’s directory and start it up.
+    Navigate into the site’s directory and start it up (requires Gatsby CLI).
 
     ```shell
-    cd my-hello-world-starter/
+    cd mdx-blog-demo/
     gatsby develop
     ```
+
+	_Note: If you do not have Gatsby CLI installed, you can still start it up via `npm run develop`_
 
 1.  **Open the source code and start editing!**
 
@@ -38,7 +31,7 @@ _Have another more specific idea? You may want to check out our vibrant collecti
 
     _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql)._
 
-    Open the `my-hello-world-starter` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
+    Open the `mdx-blog-demo` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes and the browser will update in real time!
 
 ## 🧐 What's inside?
 
@@ -93,5 +86,3 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
 ## 💫 Deploy
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-hello-world)
-
-<!-- AUTO-GENERATED-CONTENT:END -->
