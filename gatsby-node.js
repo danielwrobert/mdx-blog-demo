@@ -29,3 +29,11 @@ exports.createPages = async ({ graphql, actions: { createPage }, reporter }) => 
 		});
 	});
 };
+
+exports.onCreateWebpackConfig = ({ actions: { setWebpackConfig } }) => {
+	setWebpackConfig({
+		resolve: {
+			modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+		},
+	});
+};

@@ -5,6 +5,8 @@ slug: first-post
 excerpt: New Year's resolution blog post!
 ---
 
+import Shoutout from "components/shoutout";
+
 ## Header
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin maximus 
@@ -30,6 +32,14 @@ Sed ut tincidunt velit. Phasellus et dui at erat consequat tempor id
 egestas magna.
 
 ## Header
+
+<Shoutout>
+
+### Shoutout
+
+Some test text here - this block should render as wrapped in a `div` with the class name `shoutout`.
+
+</Shoutout>
 
 Pellentesque vulputate eleifend leo, sit amet viverra felis venenatis 
 vel. Phasellus consequat et elit eu elementum. Vivamus eu urna nec est 

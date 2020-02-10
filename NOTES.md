@@ -59,7 +59,6 @@ In our page templates, we don't need to use the StaticQuery like we did for our 
 
 Inside of our GraphQL data, we have a `code` option with a `body` property (which I've seen previusly in issues research). This is a function that will execute and give us the data that we need. We can't just display this funciton in our HTML so we need to modofy our query so that we can utilize the component [`MDXRenderer`](https://www.gatsbyjs.org/packages/gatsby-plugin-mdx/#mdxrenderer) that we get with MDX that will allow us to work with the code body data.
 
-
 ## Creating Listing Pages
 
 The easiest way to create a listing page in Gatsby is to just make a template/page manually. Because this is a static file, we need to run our query via a static query, using the `useStaticQuery` hook.
@@ -71,3 +70,17 @@ A static query is a component that uses the `useStaticQuery` hook (previously Re
 **Page Query**
 
 A page query only works with Pages in Gatsby.
+
+## Adding React components to MDX Files
+
+In this lesson we modify the `gatsby-node.js` file to add an additional config which allows us to type imports with the assumption that you're starting at the root `src/` directory. For example, this adjsutment allows you to import from `components/Shoutout` as opposed to `../../src/components/Shoutout`.
+
+We then adjusted the MDX plugin in VC Code to read all `.md` files as `.mdx` files. This is done in the preferences (settings.json) by adding the following config:
+
+```
+	"files.associations": {
+		"*md": "mdx"
+	},
+```
+
+We then created a wrapper component as an example of using React Components in our MDX files.
