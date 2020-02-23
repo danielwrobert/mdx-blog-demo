@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, graphql, useStaticQuery } from 'gatsby';
 import Layout from '../components/layout';
+import SEO from '../components/seo';
 
 const BlogListing = () => {
 	const data = useStaticQuery(graphql`
@@ -22,6 +23,7 @@ const BlogListing = () => {
 
 	return (
 		<Layout>
+			<SEO title="Blog posts" />
 			<h1>Blog Posts</h1>
 			<hr />
 			{/* {posts.map(post => {})} */}

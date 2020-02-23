@@ -2,6 +2,7 @@ import React from 'react';
 import Layout from '../components/layout';
 import { Link, graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
+import SEO from '../components/seo';
 
 export const postQuery = graphql`
 	query MDXQuery($slug: String!) {
@@ -35,6 +36,7 @@ export default ({ data }) => {
 
 	return (
 		<Layout>
+			<SEO title={title} />
 			<p>
 				<Link to={'/blog/'}>&lt; Back to all posts</Link>
 			</p>

@@ -18,9 +18,11 @@
     "@mdx-js/react": "^1.5.3",
     "gatsby": "^2.18.12",
     "gatsby-plugin-mdx": "^1.0.64",
+    "gatsby-plugin-react-helmet": "^3.1.22",
     "gatsby-source-filesystem": "^2.1.43",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "react-helmet": "^5.2.1"
   },
   "devDependencies": {
     "prettier": "^1.19.1"
