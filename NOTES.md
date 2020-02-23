@@ -84,3 +84,54 @@ We then adjusted the MDX plugin in VC Code to read all `.md` files as `.mdx` fil
 ```
 
 We then created a wrapper component as an example of using React Components in our MDX files.
+
+## SEO Metadata with React Helmet
+
+In this lesson we cover adding an SEO component and setting up our Metadata with React Helmet. A great reference point for this is the official Gatsby Starter Default starter.
+
+## Working with Images in Gatsby
+
+**Basic approach**
+
+The easiest and most basic way to work with images in Gatsby is to simply import the image file and use that import as the src of an `<img>` element in your site.
+
+```
+import gatsbyAstronaut from '../images/gatsby-astronaut.png';
+
+export default () => (
+	<Layout>
+		<SEO title="Welcome to our fine site!" />
+		<h1>Hello world!</h1>
+		<img src={gatsbyAstronaut} alt="Gatsby Astronaut" />
+		<p>
+			Read more <Link to={'/about'}>about me</Link>.
+		</p>
+	</Layout>
+);
+```
+
+This is a good use case for decorative images that are a part of your site/theme - something that is actually for the design or layout itself. Not the best approach for content, however.
+
+Another area where you would commonly use images is in your stylesheets. To do this, you just point to the relative path of your image from your stylesheet - just like you would any other basic static site:
+
+```
+.shoutout {
+  /* background: lightgoldenrodyellow; */
+  background: url(../images/gatsby-icon.png);
+  padding: 1rem;
+}
+```
+
+**Static directory**
+
+Alternative to relative paths, you can place your images in the `/static` directory and link to them via `/`. For example, if the above astronaut image was stored in the `/static` directory, we could just use it as the image src as `/gatsby-astronaut.png` (`<img src="/gatsby-astronaut.png"/>`).
+
+This is not the suggested best practice, however. We can do much more powerful and dynamic things with our images if Gatsby is aware of them and `/static` is just kind of a hold-all for anything you want to be dumped into the final site output.
+
+**Gatsby Image**
+
+Gatsby has a very powerful built-in component that allows you to work with images in a more powerful, performant way than demonstrated above. This is the Gatsby Image component.
+
+**GraphQL**
+
+As opposed to using relative paths to our images, we can query our images via GraphQL.
