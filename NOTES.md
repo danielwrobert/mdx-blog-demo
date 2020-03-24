@@ -83,6 +83,8 @@ We then adjusted the MDX plugin in VC Code to read all `.md` files as `.mdx` fil
 	},
 ```
 
+**Update:** I've removed this setting because it messes up all of the deafult MD settings, such as the Preview mode in VS Code. Can keep the plugin and, if I want to use MDX, I will name the files with that ext.
+
 We then created a wrapper component as an example of using React Components in our MDX files.
 
 ## SEO Metadata with React Helmet
@@ -135,3 +137,24 @@ Gatsby has a very powerful built-in component that allows you to work with image
 **GraphQL**
 
 As opposed to using relative paths to our images, we can query our images via GraphQL.
+
+## Working with Gatsby Image
+
+- [Docs](https://www.gatsbyjs.org/packages/gatsby-image/)
+- [Demo](https://using-gatsby-image.gatsbyjs.org/)
+
+**Note:** `gatsby-image` is not a drop-in replacement for `<img />`. It’s optimized for fixed width/height images and images that stretch the full-width of a container. Some ways you can use `<img />` won’t work with `gatsby-image`.
+
+To set up, we need to include [gatsby-transformer-sharp](https://www.gatsbyjs.org/packages/gatsby-transformer-sharp/) and [gatsby-plugin-sharp](https://www.gatsbyjs.org/packages/gatsby-plugin-sharp/) as well, and make sure they are installed and included in your `gatsby-config` file.
+
+```
+npm install --save gatsby-image gatsby-transformer-sharp gatsby-plugin-sharp
+```
+
+Then in your `gatsby-config.js`:
+
+```
+plugins: [`gatsby-transformer-sharp`, `gatsby-plugin-sharp`]
+```
+
+With that in place, we can use the `Img` component from `gatsby-image`.
