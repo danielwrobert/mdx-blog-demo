@@ -338,3 +338,75 @@ With these queries in place, we can map over our images for the `images` query o
 	<Img key={image.id} fixed={image.childImageSharp.fixed} />
 ))}
 ```
+
+## Images in Markdown
+
+To use images in our Markdown, we'll need to install the `gatsby-remark-images` plugin (see [plugin page](https://www.gatsbyjs.org/packages/gatsby-remark-images/)).
+
+```
+npm install --save gatsby-remark-images gatsby-plugin-sharp
+```
+
+With that installed, we need to go into our config file. Instead of configuring a new plugin, we'll update our confguration for Gatsby MDX (`gatsby-plugin-mdx`).
+
+We can update our Gatsby Plugin MDX configuration by adding the following to the `options` object (underneath `extensions` - see [the plugin docs](https://www.gatsbyjs.org/packages/gatsby-plugin-mdx/#gatsby-remark-plugins) for additional options/details):
+
+```
+gatsbyRemarkPlugins: [
+	{
+		resolve: `gatsby-remark-images`,
+		options: {
+			maxWidth: 590,
+		},
+],
+	},
+```
+
+In addition to the `maxWidth` in the example above, there are a bunch of other configuration options that are listed in [the documentation](https://www.gatsbyjs.org/packages/gatsby-remark-images/#options) for the `gatsby-remark-images` plugin.
+
+With the above in place, we can import our images directly, as follows:
+
+```
+![White and Yellow Flowers](./images/allie-smith.jpg)
+```
+
+We may, however, wish to have a little more control over our image options. In this case, we can create an image wrapper component (see `src/components/mdx-image-wrapper.js`):
+
+```
+import React from 'react';
+
+const MDXImage = ({ float, width, margin, children }) => {
+	const style = {
+		float: float || 'none',
+		width: width || '50%',
+		margin: margin || '10px',
+	};
+	console.log(children);
+
+	return <div style={style}>{children.props.children}</div>;
+};
+
+export default MDXImage;
+```
+
+There are a couple of things to note about the above:
+
+First of all, why are we outputting `children.props.children`?
+
+This is because, when you add the image wrapper, you need to add an additional space before and after the markdown for the image, otherwise it will output that markdown as a string. Because of these extra spaces, the output will wrap the image in an additional `<p>` tag.
+
+Another improtant thing to note is that you do not want to indent the markdown for the image, otherwise it will be treated as `<code>` and output as text.
+
+So with the above component, you can use it as follows:
+
+```
+import MDXImage from 'components/mdx-image-wrapper';
+
+<MDXImage float="right" width="200px" margin="0 0 10px 10px">
+
+![White and Yellow Flowers](./images/allie-smith.jpg)
+
+</MDXImage>
+```
+
+Notice the extra lines between the component tag and the markdown text. Also notice the lack of indentation to the markdown text.
