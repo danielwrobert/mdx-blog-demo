@@ -410,3 +410,12 @@ import MDXImage from 'components/mdx-image-wrapper';
 ```
 
 Notice the extra lines between the component tag and the markdown text. Also notice the lack of indentation to the markdown text.
+
+## Deploying a Gatsby Site
+
+In this lesson, we will set up our site to deploy to Netlify.
+
+TIL, you can also set up a staging site via a separate branch with Netlify. To do this (at the time of the video recording) visit the Netlify admin and go to **Deploy Settings > Build Settings > Deploy Contexts**. Click on the **Edit settings** and set up **Branch Deploys**. Change the option to "Let me add individual branches" and then add your additional branch names under there (ex., `staging`).
+
+This will add a new site at the same url prefixed with your branch name and two dashes. For example, `staging` branch would be prefixed with `staging--`.
+
