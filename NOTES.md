@@ -63,11 +63,11 @@ Inside of our GraphQL data, we have a `code` option with a `body` property (whic
 
 The easiest way to create a listing page in Gatsby is to just make a template/page manually. Because this is a static file, we need to run our query via a static query, using the `useStaticQuery` hook.
 
-**Static Query**
+### Static Query
 
 A static query is a component that uses the `useStaticQuery` hook (previously Render Props) to allow us to fetch data from our GraphQL API in Gatsby. This query can be used anywhere but it does not accept variables or any sort of parameters. In addition, it can not use `context`.
 
-**Page Query**
+### Page Query
 
 A page query only works with Pages in Gatsby.
 
@@ -93,7 +93,7 @@ In this lesson we cover adding an SEO component and setting up our Metadata with
 
 ## Working with Images in Gatsby
 
-**Basic approach**
+### Basic approach
 
 The easiest and most basic way to work with images in Gatsby is to simply import the image file and use that import as the src of an `<img>` element in your site.
 
@@ -124,19 +124,21 @@ Another area where you would commonly use images is in your stylesheets. To do t
 }
 ```
 
-**Static directory**
+The two approaches above are the best way to include images for anything that has to do with the theme or development of your site.
+
+### Static directory
 
 Alternative to relative paths, you can place your images in the `/static` directory and link to them via `/`. For example, if the above astronaut image was stored in the `/static` directory, we could just use it as the image src as `/gatsby-astronaut.png` (`<img src="/gatsby-astronaut.png"/>`).
 
 This is not the suggested best practice, however. We can do much more powerful and dynamic things with our images if Gatsby is aware of them and `/static` is just kind of a hold-all for anything you want to be dumped into the final site output.
 
-**Gatsby Image**
+### Gatsby Image
 
 Gatsby has a very powerful built-in component that allows you to work with images in a more powerful, performant way than demonstrated above. This is the Gatsby Image component.
 
-**GraphQL**
+### GraphQL	
 
-As opposed to using relative paths to our images, we can query our images via GraphQL.
+As opposed to using relative paths to our images, we can query our images via GraphQL. This is a bit more standard than just linking to the images directly (as shown in the first example) because once Gatsby is aware of our images in our system, it can handle a lot of automation and processing to optimize performance.
 
 ## Working with Gatsby Image
 
@@ -158,3 +160,181 @@ plugins: [`gatsby-transformer-sharp`, `gatsby-plugin-sharp`]
 ```
 
 With that in place, we can use the `Img` component from `gatsby-image`.
+
+Lastly, we need to set the file location and query for the images, in the same way we did with our blog content MDX files:
+
+```
+{
+	resolve: `gatsby-source-filesystem`,
+	options: {
+		name: `images`,
+		path: `${__dirname}/src/images`,
+	},
+},
+```
+
+### Fragments
+
+Gatsby has some GraphQL fragments that are available to us by default that we can take advantage of. These are reusable pieces of GraphQL that are really helpful.
+
+### Querying
+
+Once we're set up, we can get a bunch of extra data (`srcset`, webp formats, SVG traces, etc.) from Gatsby Image. We can query our images to get this data from GraphQL.
+
+Query example:
+
+```
+query ImageQuery {
+  file(relativePath: {eq: "gatsby-astronaut.png"}) {
+    id
+    childImageSharp {
+      sizes {
+        src
+      }
+    }
+  }
+}
+```
+OR
+```
+query ImageQuery {
+  file(relativePath: {eq: "gatsby-astronaut.png"}) {
+    id
+    childImageSharp {
+      fixed {
+        src
+        srcSet
+      }
+      fluid {
+        src
+        srcSet
+      }
+    }
+  }
+}
+```
+
+Note that Gatsby already knows where the images are located because we set that up in our `gatsby-config.js` file. The above are some common queries we might use to grab fixed and/or fluid images, as well as just direct query to an image.
+
+Now we can use this to load images into actual components to be used on our site.
+
+### Photos example
+
+In the example, we create a new component and import the `useStaticQuery` hook to pull our above data from GraphQL. One handy thing to note is that, above we have the `file` data. We can rename that in our query to `image` (as follows) so that when we go to access our data, we can do so by `data.image`, which is more intuitive.
+
+```
+query ImageQuery {
+	image: file(relativePath: {eq: "gatsby-astronaut.png"}) {
+		id
+		childImageSharp {
+			fixed {
+				src
+				srcSet
+			}
+			fluid {
+				src
+				srcSet
+			}
+		}
+	}
+}
+```
+
+With our data, we can plug into Gatsby Image. This component takes in a bunch of properties that are worth looking into [at the documentation](https://www.gatsbyjs.org/packages/gatsby-image/#gatsby-image-props).
+
+In this example we cover `fixed` and `fluid` props, as shown from our query above.
+
+The `fixed` prop is going to output a set width and the `fluid` prop will set the image to be 100% of it's container.
+
+Instead of hardcoding the data we need, as we did above, we can use the provided Gatsby Transformer Sharp [fragments from Gatsby Image](https://www.gatsbyjs.org/packages/gatsby-image/#gatsby-transformer-sharp). There are a bunch of handy props from className to [color filters](https://www.gatsbyjs.org/packages/gatsby-image/#query) - worth checking out!
+
+the th this in mind, the above query shoudld be re-written as follows:
+
+```
+query ImageQuery {
+	image: file(relativePath: {eq: "gatsby-astronaut.png"}) {
+		id
+		childImageSharp {
+			fixed {
+				...GatsbyImageSharpFixed
+			}
+			fluid {
+				...GatsbyImageSharpFluid
+			}
+		}
+	}
+}
+```
+
+This ensures that the Gatsby Image component will get all of the specific data that it wansts/expects.
+
+### Fixed
+
+We can optionally pass in a set width to the `fixed` query, which will ensure that the width is fixed to that size:
+
+```
+query ImageQuery {
+	image: file(relativePath: {eq: "gatsby-astronaut.png"}) {
+		id
+		childImageSharp {
+			fixed( width: 400 ) {
+				...GatsbyImageSharpFixed
+			}
+			fluid {
+				...GatsbyImageSharpFluid
+			}
+		}
+	}
+}
+```
+
+### Fluid
+
+If you change the `Img` prop from `fixed` to `fluid`, you'll see that the image will always be set to 100% of it's container, as noted above.
+
+Another nice thing is that these will be optimized for device width. If you are on a large screen, it will provide a larger image. If you're on a smaller screen, it will serve a smaller image.
+
+### Multiple Images
+
+Sometimes you want to get multiple images, for example a photo gallery. To do this, you can adjust your query to run against all files, instead of a single file. You can then filter by the relative directory path so you only get the images you want.
+
+```
+const data = useStaticQuery(graphql`
+	query ImageQuery {
+		images: allFile(filter: { relativeDirectory: { eq: "gallery" } }) {
+			nodes {
+				id
+				childImageSharp {
+					fixed(width: 200, height: 200) {
+						...GatsbyImageSharpFixed
+					}
+				}
+			}
+		}
+		image: file(relativePath: { eq: "allie-smith.jpg" }) {
+			id
+			childImageSharp {
+				fixed(width: 400, duotone: { highlight: "#ff0000", shadow: "#ffffff" }) {
+					...GatsbyImageSharpFixed
+				}
+				fluid {
+					...GatsbyImageSharpFluid
+				}
+			}
+		}
+	}
+`);
+```
+
+With these queries in place, we can map over our images for the `images` query or output a single image with the `image` query:
+
+```
+// Single image (one fixed, one fluid):
+<Img fixed={data.image.childImageSharp.fixed} />
+<Img fluid={data.image.childImageSharp.fluid} />
+
+// Multiple images;
+{data.images.nodes.map(image => (
+	<Img key={image.id} fixed={image.childImageSharp.fixed} />
+))}
+```
