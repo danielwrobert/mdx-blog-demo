@@ -1,5 +1,6 @@
 const path = require('path');
 
+// Dynamically create Post pages from markdown files.
 exports.createPages = async ({ graphql, actions: { createPage }, reporter }) => {
 	const postsQuery = await graphql(`
 		query {
@@ -30,6 +31,7 @@ exports.createPages = async ({ graphql, actions: { createPage }, reporter }) => 
 	});
 };
 
+// Set absolute import paths from /src
 exports.onCreateWebpackConfig = ({ actions: { setWebpackConfig } }) => {
 	setWebpackConfig({
 		resolve: {
